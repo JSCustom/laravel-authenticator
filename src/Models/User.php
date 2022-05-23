@@ -55,14 +55,12 @@ class User extends Authenticatable
       'username' => [
         config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
         config('authenticator.model.authenticator.username.type'),
-        config('authenticator.model.authenticator.username.unique') ? 'unique:users,username,'.$id.',id' : '',
         'min:' . config('authenticator.model.authenticator.username.minlength') ?? 0,
         'max:' . config('authenticator.model.authenticator.username.maxlength') ?? 255
       ],
       'email' => [
         config('authenticator.model.authenticator.email.required') ? 'required' : 'nullable',
         config('authenticator.model.authenticator.email.type'),
-        config('authenticator.model.authenticator.email.unique') ? 'unique:users,email,'.$id.',id' : '',
         'min:' . config('authenticator.model.authenticator.email.minlength') ?? 0,
         'max:' . config('authenticator.model.authenticator.email.maxlength') ?? 255
       ],
