@@ -53,24 +53,24 @@ class User extends Authenticatable
   {
     $validator = Validator::make($request->all(), [
       'username' => [
-        config('user.model.authenticator.username.required') ? 'required' : 'nullable',
-        config('user.model.authenticator.username.type'),
-        config('user.model.authenticator.username.unique') ? 'unique:users,username,'.$id.',id' : '',
-        'min:' . config('user.model.authenticator.username.minlength') ?? 0,
-        'max:' . config('user.model.authenticator.username.maxlength') ?? 255
+        config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.username.type'),
+        config('authenticator.model.authenticator.username.unique') ? 'unique:users,username,'.$id.',id' : '',
+        'min:' . config('authenticator.model.authenticator.username.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.username.maxlength') ?? 255
       ],
       'email' => [
-        config('user.model.authenticator.email.required') ? 'required' : 'nullable',
-        config('user.model.authenticator.email.type'),
-        config('user.model.authenticator.email.unique') ? 'unique:users,email,'.$id.',id' : '',
-        'min:' . config('user.model.authenticator.email.minlength') ?? 0,
-        'max:' . config('user.model.authenticator.email.maxlength') ?? 255
+        config('authenticator.model.authenticator.email.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.email.type'),
+        config('authenticator.model.authenticator.email.unique') ? 'unique:users,email,'.$id.',id' : '',
+        'min:' . config('authenticator.model.authenticator.email.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.email.maxlength') ?? 255
       ],
       'password' => [
-        config('user.model.authenticator.password.required') ? 'required' : 'nullable',
-        config('user.model.authenticator.password.type'),
-        'min:' . config('user.model.authenticator.password.minlength') ?? 0,
-        'max:' . config('user.model.authenticator.password.maxlength') ?? 255
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255
       ]
     ]);
     if ($validator->stopOnFirstFailure()->fails()) {
