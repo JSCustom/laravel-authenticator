@@ -48,6 +48,7 @@ return [
         'auth-signup',
         'auth-forgot-password',
         'auth-reset-password',
+        'auth-change-password'
     ],
     'middleware' => ['api']
 ];

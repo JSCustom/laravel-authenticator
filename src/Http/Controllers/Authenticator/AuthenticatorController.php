@@ -29,4 +29,41 @@ class AuthenticatorController extends Controller
         $user->currentAccessToken()->delete();
         return response(['message' => 'Logout successful.'], HttpServiceProvider::OK);
     }
+    public function register(Request $request)
+    {
+        $user = $this->_user->register($request);
+        if (!$user->status) {
+            return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
+        }
+        return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::OK);
+    }
+    public function forgotPassword(Request $request)
+    {
+        $user = $this->_user->forgotPassword($request);
+        if (!$user->status) {
+            return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
+        }
+        return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::OK);
+    }
+    public function resetPassword(Request $request)
+    {
+        $user = $this->_user->resetPassword($request);
+        if (!$user->status) {
+            return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
+        }
+        return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::OK);
+    }
+    public function changePassword(Request $request)
+    {
+        if (config('authenticator.sanctum.enabled')) {
+            if (!Auth::user()->tokenCan('auth-change-password')) {
+                return response(['status' => false, 'message' => HttpServiceProvider::FORBIDDEN_ACCESS_MESSAGE], HttpServiceProvider::FORBIDDEN_ACCESS);
+            }
+        }
+        $user = $this->_user->changePassword($request);
+        if (!$user->status) {
+            return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
+        }
+        return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::OK);
+    }
 }
