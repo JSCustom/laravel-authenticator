@@ -72,7 +72,18 @@ class User extends Authenticatable
       $errors = $validator->errors();
       return (object)['status' => false, 'message' => $errors->first()];
     }
-    if (!Auth::attempt($validator, $request->remember_me)) {
+    $login = $request->validate([
+      'username' => [
+        config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
+      ],
+      'email' => [
+        config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
+      ],
+      'password' => [
+        config('authenticator.model.authenticator.password.type')
+      ]
+    ]);
+    if (!Auth::attempt($login, $request->remember_me)) {
       return (object)['status' => false, 'message' => 'Invalid login credentials.'];
     }
     $user = Auth::user();
