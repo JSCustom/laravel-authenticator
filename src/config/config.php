@@ -40,7 +40,7 @@ return [
         ]
     ],
     'sanctum' => [
-        'enabled' => false
+        'enabled' => true
     ],
     'abilities' => [
         'auth-login',
