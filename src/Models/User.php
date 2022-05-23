@@ -2,11 +2,15 @@
 
 namespace JSCustom\LaravelAuthenticator\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
@@ -90,8 +94,6 @@ class User extends Authenticatable
     if (!$user) {
       return (object)['status' => false, 'message' => 'Invalid login credentials.'];
     }
-    $user->userProfile;
-    $user->userRole;
-    return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile['first_name'], 'data' => $user];
+    return (object)['status' => true, 'message' => 'Welcome, ', 'data' => $user];
   }
 }
