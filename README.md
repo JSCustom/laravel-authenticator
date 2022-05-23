@@ -5,6 +5,7 @@ Laravel package for user management. Includes user, user profile and user role.
 ## Table of Contents
 
 [Getting Started](#getting-started)<br>
+[Prerequisites](#prerequisites)<br>
 [Installation](#installation)<br>
 [How to Use](#how-to-use)<br>
 [Download Postman API](#download-postman-api)<br>
@@ -36,7 +37,7 @@ Install Laravel Sanctum via Composer:
 composer require laravel/sanctum
 ```
 
-Uncomment ***\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class*** located in ***app/Http/Kernel.php*** file
+Uncomment ***\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class*** located in the ***app/Http/Kernel.php*** file
 
 ```bash
 'api' => [
@@ -44,6 +45,13 @@ Uncomment ***\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful:
   'throttle:api',
   \Illuminate\Routing\Middleware\SubstituteBindings::class,
 ]
+```
+
+Add the following lines of code to the ***$routeMiddleware*** variable in the ***app/Http/Kernel.php*** file
+
+```bash
+'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
+'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class
 ```
 
 <a name="installation"></a>
