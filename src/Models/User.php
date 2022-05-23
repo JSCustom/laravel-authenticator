@@ -92,6 +92,7 @@ class User extends Authenticatable
     }
     $user->userProfile;
     $user->userRole;
-    return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile->first_name, 'data' => $user];
+    $userProfile = $user->userProfile;
+    return (object)['status' => true, 'message' => 'Welcome, ' . $userProfile->first_name, 'data' => $user];
   }
 }
