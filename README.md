@@ -28,7 +28,15 @@ Below are the steps in order to integrate user management API to your Laravel pr
 
 <a name="prerequisites"></a>
 ## Prerequisites
-1. Laravel Sanctum [follow guide here](https://packagist.org/packages/laravel/sanctum)
+### Laravel Sanctum
+
+Install Laravel Sanctum via Composer:
+
+```bash
+composer require laravel/sanctum
+```
+
+Uncomment ***\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class*** located in ***app/Http/Kernel.php*** file
 
 <a name="installation"></a>
 ## Installation
