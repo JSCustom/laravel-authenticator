@@ -94,6 +94,9 @@ class User extends Authenticatable
     if (!$user) {
       return (object)['status' => false, 'message' => 'Invalid login credentials.'];
     }
+    $user = User::find(Auth::user()->id);
+    $user->userProfile;
+    $user->userRole;
     return (object)['status' => true, 'message' => 'Welcome, ', 'data' => $user];
   }
 }
