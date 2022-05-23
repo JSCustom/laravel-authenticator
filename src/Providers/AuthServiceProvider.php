@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     CONST USER_MANAGEMENT_ABILITIES = [
-        'user-create',
-        'user-edit',
-        'user-list',
-        'user-view',
-        'user-delete'
+        'auth-login',
+        'auth-logout',
+        'auth-signup',
+        'auth-forgot-password',
+        'auth-reset-password'
     ];
     /**
      * The policy mappings for the application.

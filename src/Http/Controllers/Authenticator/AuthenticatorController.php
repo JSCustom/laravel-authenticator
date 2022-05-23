@@ -17,4 +17,15 @@ class AuthenticatorController extends Controller
         }
         return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['user' => $user->data]], HttpServiceProvider::OK);
     }
+    public function logout(Request $request)
+    {
+        if (config('authenticator.sanctum.enabled')) {
+            if (!Auth::user()->tokenCan('auth-logout')) {
+                return response(['status' => false, 'message' => HttpServiceProvider::FORBIDDEN_ACCESS_MESSAGE], HttpServiceProvider::FORBIDDEN_ACCESS);
+            }
+        }
+        $user = auth()->user();
+        $user->currentAccessToken()->delete();
+        return response(['message' => 'Logout successful.'], HttpServiceProvider::OK);
+    }
 }
