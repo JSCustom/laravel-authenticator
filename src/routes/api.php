@@ -1,16 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController;
-use JSCustom\LaravelAuthenticator\Providers\AuthServiceProvider;
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('/login', [AuthenticatorController::class, 'login']);
 });
 
-if (config('user.sanctum.enabled')) {
+if (config('authenticator.sanctum.enabled')) {
     Route::group(['middleware' => [
         'auth:sanctum',
-        'ability:'.implode(',', AuthServiceProvider::AUTHENTICATOR_ABILITIES)
+        'ability:'.implode(',', config('authenticator.abilities'))
         ]
     ], function() {
         Route::group(['prefix' => 'auth'], function() {

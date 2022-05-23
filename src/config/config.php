@@ -40,14 +40,14 @@ return [
         ]
     ],
     'sanctum' => [
-        'enabled' => false,
-        'modules' => [
-            'auth-login',
-            'auth-logout',
-            'auth-signup',
-            'auth-forgot-password',
-            'auth-reset-password',
-        ]
+        'enabled' => false
+    ],
+    'abilities' => [
+        'auth-login',
+        'auth-logout',
+        'auth-signup',
+        'auth-forgot-password',
+        'auth-reset-password',
     ],
     'middleware' => ['api']
 ];

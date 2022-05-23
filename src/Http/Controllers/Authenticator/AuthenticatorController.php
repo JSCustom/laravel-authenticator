@@ -15,7 +15,8 @@ class AuthenticatorController extends Controller
         if (!$user->status) {
             return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
         }
-        return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['user' => $user->data]], HttpServiceProvider::OK);
+        $accessToken = $user->data->createToken('abilities', config('authenticator.abilities'));
+        return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['user' => $user->data, 'access_token' => $accessToken->plainTextToken]], HttpServiceProvider::OK);
     }
     public function logout(Request $request)
     {
