@@ -38,6 +38,14 @@ composer require laravel/sanctum
 
 Uncomment ***\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class*** located in ***app/Http/Kernel.php*** file
 
+```bash
+'api' => [
+  \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+  'throttle:api',
+  \Illuminate\Routing\Middleware\SubstituteBindings::class,
+]
+```
+
 <a name="installation"></a>
 ## Installation
 Install the package using composer:
