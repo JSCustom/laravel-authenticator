@@ -97,6 +97,6 @@ class User extends Authenticatable
     $user = User::find(Auth::user()->id);
     $user->userProfile;
     $user->userRole;
-    return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile->first_name, 'data' => $user];
+    return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile->first_name . '!', 'data' => $user];
   }
 }
