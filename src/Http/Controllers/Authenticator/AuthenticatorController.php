@@ -1,6 +1,6 @@
 <?php
 
-namespace JSCustom\LaravelAuthenticator\Http\Controllers\User;
+namespace JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator;
 
 use JSCustom\LaravelAuthenticator\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request;
