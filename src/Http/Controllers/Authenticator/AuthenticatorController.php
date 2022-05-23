@@ -15,6 +15,6 @@ class AuthenticatorController extends Controller
         if (!$user->status) {
             return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
         }
-        return response(['status' => $user->status, 'message' => 'hello', 'payload' => ['user' => $user->data]], HttpServiceProvider::OK);
+        return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['user' => $user->data]], HttpServiceProvider::OK);
     }
 }
