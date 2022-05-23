@@ -56,7 +56,7 @@ class User extends Authenticatable
         'max:' . config('authenticator.model.authenticator.username.maxlength') ?? 255
       ],
       'email' => [
-        config('authenticator.model.authenticator.email.required') ? 'required' : 'optional',
+        config('authenticator.model.authenticator.email.required') ? 'required' : 'nullable',
         config('authenticator.model.authenticator.email.type'),
         'min:' . config('authenticator.model.authenticator.email.minlength') ?? 0,
         'max:' . config('authenticator.model.authenticator.email.maxlength') ?? 255
@@ -77,7 +77,7 @@ class User extends Authenticatable
         config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
       ],
       'email' => [
-        config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.email.required') ? 'required' : 'nullable',
       ],
       'password' => [
         config('authenticator.model.authenticator.password.type')
