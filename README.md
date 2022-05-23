@@ -26,6 +26,10 @@ Laravel package for user management. Includes user, user profile and user role.
 ## Getting Started
 Below are the steps in order to integrate user management API to your Laravel project.
 
+<a name="prerequisites"></a>
+## Prerequisites
+1. Laravel Sanctum [follow guide here](https://packagist.org/packages/laravel/sanctum)
+
 <a name="installation"></a>
 ## Installation
 Install the package using composer:
