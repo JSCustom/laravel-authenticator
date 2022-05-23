@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    CONST USER_MANAGEMENT_ABILITIES = [
+    CONST AUTHENTICATOR_ABILITIES = [
         'auth-login',
         'auth-logout',
         'auth-signup',

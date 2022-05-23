@@ -10,16 +10,16 @@ Route::group(['prefix' => 'auth'], function() {
 if (config('user.sanctum.enabled')) {
     Route::group(['middleware' => [
         'auth:sanctum',
-        'ability:'.implode(',', AuthServiceProvider::USER_MANAGEMENT_ABILITIES)
+        'ability:'.implode(',', AuthServiceProvider::AUTHENTICATOR_ABILITIES)
         ]
     ], function() {
         Route::group(['prefix' => 'auth'], function() {
-            Route::post('logout', [AuthenticatorController::class, 'logout']);
+            Route::post('/logout', [AuthenticatorController::class, 'logout']);
         });
     });
 } else {
     Route::group(['prefix' => 'auth'], function() {
-        Route::post('logout', [AuthenticatorController::class, 'logout']);
+        Route::post('/logout', [AuthenticatorController::class, 'logout']);
     });
 }
 ?>
