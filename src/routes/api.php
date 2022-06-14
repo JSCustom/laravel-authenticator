@@ -9,7 +9,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/reset-password', [AuthenticatorController::class, 'resetPassword']);
 });
 
-Route::group(['middleware' => [
+/* Route::group(['middleware' => [
     'auth:sanctum',
     'ability:'.implode(',', config('authenticator.abilities'))
     ]
@@ -18,5 +18,5 @@ Route::group(['middleware' => [
         Route::post('/logout', [AuthenticatorController::class, 'logout']);
         Route::post('/change-password', [AuthenticatorController::class, 'changePassword']);
     });
-});
+}); */
 ?>
