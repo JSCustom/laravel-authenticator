@@ -6,7 +6,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/login', [AuthenticatorController::class, 'login']);
     Route::post('/register', [AuthenticatorController::class, 'register']);
     Route::post('/forgot-password', [AuthenticatorController::class, 'forgotPassword']);
-    Route::post('/reset-password', [AuthenticatorController::class, 'resetPassword']);
+    Route::post('/reset-password/{reset_password_token}', [AuthenticatorController::class, 'resetPassword']);
 });
 if (config('authenticator.sanctum.enabled')) {
     Route::group(['middleware' => [

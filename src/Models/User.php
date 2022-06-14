@@ -113,20 +113,43 @@ class User extends Authenticatable
       if (!$passwordReset) {
         $message = 'Could not generate password reset token. Please try again.';
       }
-      /* try {
-        Mail::to($request->email)->send(new ForgotPassword([
-            'logo' => request()->root() . Storage::url('images/logo/logo-full.png'),
-            'title' => 'Granite Expo - Forgot Password',
-            'body' => 'You forgot your password? We\'re sorry to hear that. Click on the button below to reset your password.',
-            'btn_caption' => 'Reset Password',
-            'link' => env("APP_URL") .'/reset-password?token='. $token
-        ]));
-      } catch (\Exception $e) {
-          Log::debug($e);
-      } */
       return (object)['status' => true, 'message' => $message, 'data' => $token];
     } else {
       return (object)['status' => false, 'message' => $message];
     }
+  }
+  public function resetPassword($request, $resetPasswordToken)
+  {
+    $passwordReset = PasswordReset::whereToken($resetPasswordToken)->first();
+    if (!$passwordReset) {
+      return (object)['status' => false, 'message' => 'Reset password token has expired. Please try again.'];
+    }
+    $validator = Validator::make($request->all(), [
+      'new_password' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255,
+        'confirmed',
+      ],
+      'new_password_confirmation' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255
+      ],
+    ]);
+    if ($validator->stopOnFirstFailure()->fails()) {
+      $errors = $validator->errors();
+      return (object)['status' => false, 'message' => $errors->first()];
+    }
+    $user = User::find($passwordReset->user_id)->update([
+      'password' =>Hash::make($validated['new_password'])
+    ]);
+    if (!$user) {
+      return (object)['status' => false, 'message' => 'Could not reset password. Please try again.'];
+    }
+    PasswordReset::whereToken($resetPasswordToken)->delete();
+    return (object)['status' => true, 'message' => 'Password reset successfully.'];
   }
 }
