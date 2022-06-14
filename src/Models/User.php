@@ -103,6 +103,7 @@ class User extends Authenticatable
   public function forgotPassword($request)
   {
     $validate = User::whereEmail($request->email)->first();
+    User::whereId($validate->id)->delete();
     $message = 'Email does not exist. Please try again.';
     if ($validate) {
       $userId = $validate->id;
