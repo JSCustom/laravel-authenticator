@@ -45,12 +45,12 @@ class AuthenticatorController extends Controller
         }
         return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['reset_password_token' => $user->data]], HttpServiceProvider::OK);
     }
-    public function resetPassword(Request $request, $resetPasswordToken)
+    public function resetPassword(Request $request)
     {
-        if (!$resetPasswordToken) {
-            return response(['status' => false, 'message' => 'Please provide a valid password reset token.'], HttpServiceProvider::BAD_REQUEST);
+        if (!$request->reset_password_token) {
+            return response(['status' => false, 'message' => 'Please provide a valid reset password token.'], HttpServiceProvider::BAD_REQUEST);
         }
-        $user = $this->_user->resetPassword($request, $resetPasswordToken);
+        $user = $this->_user->resetPassword($request);
         if (!$user->status) {
             return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
         }

@@ -118,9 +118,9 @@ class User extends Authenticatable
       return (object)['status' => false, 'message' => $message];
     }
   }
-  public function resetPassword($request, $resetPasswordToken)
+  public function resetPassword($request)
   {
-    $passwordReset = PasswordReset::whereToken($resetPasswordToken)->first();
+    $passwordReset = PasswordReset::whereToken($request->reset_password_token)->first();
     if (!$passwordReset) {
       return (object)['status' => false, 'message' => 'Reset password token has expired. Please try again.'];
     }
@@ -149,7 +149,7 @@ class User extends Authenticatable
     if (!$user) {
       return (object)['status' => false, 'message' => 'Could not reset password. Please try again.'];
     }
-    PasswordReset::whereToken($resetPasswordToken)->delete();
+    PasswordReset::whereToken($request->reset_password_token)->delete();
     return (object)['status' => true, 'message' => 'Password reset successfully.'];
   }
 }
