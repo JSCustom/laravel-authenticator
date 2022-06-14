@@ -144,7 +144,7 @@ class User extends Authenticatable
       return (object)['status' => false, 'message' => $errors->first()];
     }
     $user = User::find($passwordReset->user_id)->update([
-      'password' =>Hash::make($validated['new_password'])
+      'password' =>Hash::make($request->new_password)
     ]);
     if (!$user) {
       return (object)['status' => false, 'message' => 'Could not reset password. Please try again.'];
