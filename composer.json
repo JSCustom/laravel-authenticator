@@ -1,6 +1,6 @@
 {
     "name": "jscustom/laravel-authenticator",
-    "description": "Laravel package for user management. Includes user, user profile and user role.",
+    "description": "Laravel package for user authentication.",
     "type": "library",
     "require": {
         "php": "^7.0|^8.0",
@@ -21,7 +21,7 @@
             "email": "jscustom@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
