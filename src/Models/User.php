@@ -99,4 +99,8 @@ class User extends Authenticatable
     $user->userRole;
     return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile->first_name . '!', 'data' => $user];
   }
+  public function forgotPassword($request)
+  {
+    
+  }
 }
