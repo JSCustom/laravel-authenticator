@@ -22,7 +22,7 @@ class LaravelAuthenticatorServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('authenticator.php'),
+            __DIR__.'/../config/config.php' => config_path('asdasd.php'),
         ], 'config');
     }
     protected function registerRoutes()
@@ -34,8 +34,8 @@ class LaravelAuthenticatorServiceProvider extends ServiceProvider
     protected function routeConfiguration()
     {
         return [
-            'prefix' => config('authenticator.prefix'),
-            'middleware' => config('authenticator.middleware'),
+            'prefix' => config('asdasd.prefix'),
+            'middleware' => config('asdasd.middleware'),
         ];
     }
     protected function registerMigrations()
