@@ -123,7 +123,7 @@ class User extends Authenticatable
       } catch (\Exception $e) {
           Log::debug($e);
       } */
-      return (object)['status' => true, 'message' => $message];
+      return (object)['status' => true, 'message' => $message, 'data' => $token];
     } else {
       return (object)['status' => false, 'message' => $message];
     }
