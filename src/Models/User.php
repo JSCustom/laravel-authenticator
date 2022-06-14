@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -101,6 +102,30 @@ class User extends Authenticatable
   }
   public function forgotPassword($request)
   {
-    
+    $validate = User::whereEmail($request->email)->first();
+    $message = 'Email does not exist. Please try again.';
+    if ($validate) {
+      $userId = $validate->id;
+      $token = Hash::make($validate->id);
+      $passwordReset = PasswordReset::store($userId, $request->email, $token);
+      $message = 'A forgot password request was sent to your email.';
+      if (!$passwordReset) {
+        $message = 'Could not generate password reset token. Please try again.';
+      }
+      /* try {
+        Mail::to($request->email)->send(new ForgotPassword([
+            'logo' => request()->root() . Storage::url('images/logo/logo-full.png'),
+            'title' => 'Granite Expo - Forgot Password',
+            'body' => 'You forgot your password? We\'re sorry to hear that. Click on the button below to reset your password.',
+            'btn_caption' => 'Reset Password',
+            'link' => env("APP_URL") .'/reset-password?token='. $token
+        ]));
+      } catch (\Exception $e) {
+          Log::debug($e);
+      } */
+      return (object)['status' => true, 'message' => $message];
+    } else {
+      return (object)['status' => false, 'message' => $message];
+    }
   }
 }
