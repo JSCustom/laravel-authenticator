@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace JSCustom\LaravelAuthenticator\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use JSCustom\LaravelAuthenticator\Models\User;
 
 class PasswordReset extends Model
 {
