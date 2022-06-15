@@ -21,7 +21,7 @@
             "email": "jscustom@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "extra": {
         "laravel": {
             "providers": [
