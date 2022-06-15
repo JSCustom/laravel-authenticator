@@ -1,6 +1,6 @@
 
 # Laravel User Management API
-Laravel package for user management. Includes user, user profile and user role.
+Laravel package for authenticator. Includes login, register, logout, change password and forgot password.
 
 ## Table of Contents
 
