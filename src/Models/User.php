@@ -123,6 +123,12 @@ class User extends Authenticatable
         'min:' . config('authenticator.model.authenticator.email.minlength') ?? 0,
         'max:' . config('authenticator.model.authenticator.email.maxlength') ?? 255
       ],
+      'password' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255
+      ],
       'status' => [
         config('authenticator.model.authenticator.status.required') ? 'required' : 'nullable',
         config('authenticator.model.authenticator.status.type')
@@ -222,6 +228,6 @@ class User extends Authenticatable
   }
   public function changePassword($request)
   {
-    
+
   }
 }
