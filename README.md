@@ -81,7 +81,7 @@ php artisan migrate --path=/database/migrations/laravel-authenticator
 <a name="download-postman-api"></a>
 ### Download Postman API
 
-Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/JSCustom/laravel-authenticator/blob/master/src/assets/postman/Laravel_User_Management.postman_collection.json).
+Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/JSCustom/laravel-authenticator/blob/master/src/assets/postman/Laravel_Authenticator.postman_collection.json).
 
 <a name="authenticator"></a>
 ### Authenticator
