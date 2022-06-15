@@ -4,14 +4,14 @@ return [
     'model' => [
         'authenticator' => [
             'username' => [
-                'required' => true,
+                'required' => true, /* false if you're using e-mail instead of username */
                 'unique' => true,
                 'type' => 'string',
                 'minlength' => 4,
                 'maxlength' => 70
             ],
             'email' => [
-                'required' => true,
+                'required' => true, /* false if you're using username instead of e-mail */
                 'unique' => true,
                 'type' => 'email',
                 'minlength' => 4,
