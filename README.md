@@ -9,23 +9,18 @@ Laravel package for user management. Includes user, user profile and user role.
 [Installation](#installation)<br>
 [How to Use](#how-to-use)<br>
 [Download Postman API](#download-postman-api)<br>
-[User Management](#user-management)<br>
-[Create User API](#create-user-api)<br>
-[Update User API](#update-user-api)<br>
-[View User API](#view-user-api)<br>
-[User List API](#user-list-api)<br>
-[Delete User API](#delete-user-api)<br>
-[User Role Management](#user-role-management)<br>
-[Create User Role API](#create-user-role-api)<br>
-[Update User Role API](#update-user-role-api)<br>
-[View User Role API](#view-user-role-api)<br>
-[User Role List API](#user-role-list-api)<br>
-[Delete User Role API](#delete-user-role-api)<br>
+[Authenticator](#authenticator)<br>
+[Login API](#login-api)<br>
+[Register API](#register-api)<br>
+[Logout API](#logout-api)<br>
+[Change Password API](#change-password-api)<br>
+[Forgot Password (Send Request) API](#forgot-password-request-api)<br>
+[Forgot Password (Reset) API](#forgot-password-reset-api)<br>
 [Support](#support)
 
 <a name="getting-started"></a>
 ## Getting Started
-Below are the steps in order to integrate user management API to your Laravel project.
+Below are the steps in order to integrate authenticator API to your Laravel project.
 
 <a name="prerequisites"></a>
 ## Prerequisite(s)
@@ -88,503 +83,195 @@ php artisan migrate --path=/database/migrations/laravel-authenticator
 
 Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/JSCustom/laravel-authenticator/blob/master/src/assets/postman/Laravel_User_Management.postman_collection.json).
 
-<a name="user-management"></a>
-### User Management
+<a name="authenticator"></a>
+### Authenticator
 
 **Features**
 
-- Create User
-- Update User
-- View User Details
-- View UserList
-- Delete User
+- Login
+- Register
+- Logout
+- Change Password
+- Forgot Password (Send Request)
+- Forgot Password (Reset)
 
 **Models**
 
 ```bash
 JSCustom\LaravelAuthenticator\Models\User
-JSCustom\LaravelAuthenticator\Models\UserAddress
 JSCustom\LaravelAuthenticator\Models\UserProfile
-```
-
-<a name="create-user-api"></a>
-### Create User API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\User\UserController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user
-```
-
-**Form Data**
-
-```bash
-{
-  "username": "stevengrant",
-  "email": "stevengrant@mail.com",
-  "status": 1,
-  "role_id": 1,
-  "first_name": "Steven",
-  "last_name": "Grant",
-}
-```
-
-**Method**
-
-```bash
-POST
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User has been saved.",
-  "payload": {
-    "user": {
-      "username": "stevengrant",
-      "email": "stevengrant@mail.com",
-      "status": 1,
-      "role_id": 1,
-      "updated_at": "2022-05-23T07:52:41.000000Z",
-      "created_at": "2022-05-23T07:52:41.000000Z",
-      "id": 2,
-      "password_unhashed": "X2QQTVZZ",
-      "user_role": {
-        "id": 1,
-        "role": "Developer",
-        "description": "Developer",
-        "created_at": "2022-05-23T15:52:12.000000Z",
-        "updated_at": "2022-05-23T15:52:12.000000Z"
-      },
-      "user_profile": {
-        "id": 2,
-        "user_id": 2,
-        "first_name": "Steven",
-        "last_name": "Grant",
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      },
-      "user_address": {
-        "id": 2,
-        "user_id": 2,
-        "line_1": null,
-        "line_2": null,
-        "city_id": null,
-        "province_id": null,
-        "postal_code": null,
-        "country_id": null,
-        "other_address_details": null,
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      }
-    }
-  }
-}
-```
-
-<a name="update-user-api"></a>
-### Update User API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\User\UserController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user/$id
-```
-
-**Form Data**
-
-```bash
-{
-  "username": "stevengrant",
-  "email": "stevengrant@mail.com",
-  "status": 1,
-  "role_id": 1,
-  "first_name": "Steven",
-  "last_name": "Grant"
-}
-```
-
-**Method**
-
-```bash
-POST
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User has been saved.",
-  "payload": {
-    "user": {
-      "id": 2,
-      "username": "stevengrant",
-      "email": "stevengrant@mail.com",
-      "status": 1,
-      "role_id": 1,
-      "email_verified_at": null,
-      "created_at": "2022-05-23T07:52:41.000000Z",
-      "updated_at": "2022-05-23T07:54:02.000000Z",
-      "password_unhashed": "OHYY0NB6",
-      "user_role": {
-        "id": 1,
-        "role": "Developer",
-        "description": "Developer",
-        "created_at": "2022-05-23T15:52:12.000000Z",
-        "updated_at": "2022-05-23T15:52:12.000000Z"
-      },
-      "user_profile": {
-        "id": 2,
-        "user_id": 2,
-        "first_name": "Steven",
-        "last_name": "Grant",
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      },
-      "user_address": {
-        "id": 2,
-        "user_id": 2,
-        "line_1": null,
-        "line_2": null,
-        "city_id": null,
-        "province_id": null,
-        "postal_code": null,
-        "country_id": null,
-        "other_address_details": null,
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      }
-    }
-  }
-}
-```
-
-<a name="view-user-api"></a>
-### View User API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\User\UserController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user/$id
-```
-
-**Method**
-
-```bash
-GET
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User found.",
-  "payload": {
-    "user": {
-      "id": 2,
-      "username": "stevengrant",
-      "email": "stevengrant@mail.com",
-      "status": 1,
-      "role_id": 1,
-      "email_verified_at": null,
-      "created_at": "2022-05-23T07:52:41.000000Z",
-      "updated_at": "2022-05-23T07:54:02.000000Z",
-      "user_role": {
-        "id": 1,
-        "role": "Developer",
-        "description": "Developer",
-        "created_at": "2022-05-23T15:52:12.000000Z",
-        "updated_at": "2022-05-23T15:52:12.000000Z"
-      },
-      "user_profile": {
-        "id": 2,
-        "user_id": 2,
-        "first_name": "Steven",
-        "last_name": "Grant",
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      },
-      "user_address": {
-        "id": 2,
-        "user_id": 2,
-        "line_1": null,
-        "line_2": null,
-        "city_id": null,
-        "province_id": null,
-        "postal_code": null,
-        "country_id": null,
-        "other_address_details": null,
-        "created_at": "2022-05-23T07:52:41.000000Z",
-        "updated_at": "2022-05-23T07:52:41.000000Z"
-      }
-    }
-  }
-}
-```
-
-<a name="user-list-api"></a>
-### User List API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\User\UserController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user/list
-```
-
-**Parameters**
-
-```bash
-{
-  "page": 1,
-  "limit": 10,
-  "q": '<search_string>',
-  "order_by": '<column_name>',
-  "sort": "asc"
-}
-```
-
-**Method**
-
-```bash
-GET
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "message": "Users found.",
-  "payload": {
-    "users": {
-      "current_page": 1,
-      "data": [
-        {
-          "id": 1,
-          "username": "developer",
-          "email": "developer@mail.com",
-          "created_at": "2022-05-23T15:52:12.000000Z",
-          "first_name": "Developer",
-          "last_name": "Developer",
-          "line_1": null,
-          "line_2": null,
-          "postal_code": null,
-          "other_address_details": null,
-          "role": "Developer"
-        },
-        {
-          "id": 3,
-          "username": "jakelockley",
-          "email": "jakelockley@mail.com",
-          "created_at": "2022-05-23T07:55:58.000000Z",
-          "first_name": "Jake",
-          "last_name": "Lockley",
-          "line_1": null,
-          "line_2": null,
-          "postal_code": null,
-          "other_address_details": null,
-          "role": "Developer"
-        },
-        {
-          "id": 4,
-          "username": "marcspector",
-          "email": "marcspector@mail.com",
-          "created_at": "2022-05-23T07:56:15.000000Z",
-          "first_name": "Marc",
-          "last_name": "Spector",
-          "line_1": null,
-          "line_2": null,
-          "postal_code": null,
-          "other_address_details": null,
-          "role": "Developer"
-        },
-        {
-          "id": 2,
-          "username": "stevengrant",
-          "email": "stevengrant@mail.com",
-          "created_at": "2022-05-23T07:52:41.000000Z",
-          "first_name": "Steven",
-          "last_name": "Grant",
-          "line_1": null,
-          "line_2": null,
-          "postal_code": null,
-          "other_address_details": null,
-          "role": "Developer"
-        }
-      ],
-      "first_page_url": "http://127.0.0.1:8000/api/user/list?page=1",
-      "from": 1,
-      "last_page": 1,
-      "last_page_url": "http://127.0.0.1:8000/api/user/list?page=1",
-      "links": [
-        {
-          "url": null,
-          "label": "&laquo; Previous",
-          "active": false
-        },
-        {
-          "url": "http://127.0.0.1:8000/api/user/list?page=1",
-          "label": "1",
-          "active": true
-        },
-        {
-          "url": null,
-          "label": "Next &raquo;",
-          "active": false
-        }
-      ],
-      "next_page_url": null,
-      "path": "http://127.0.0.1:8000/api/user/list",
-      "per_page": "10",
-      "prev_page_url": null,
-      "to": 4,
-      "total": 4
-    }
-  }
-}
-```
-
-<a name="delete-user-api"></a>
-### Delete User API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\User\UserController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user/$id
-```
-
-**Method**
-
-```bash
-DELETE
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User has been deleted."
-}
-```
-
-<a name="user-role-management"></a>
-### User Role Management
-
-**Features**
-
-- Create User Role
-- Update User Role
-- View User Role Details
-- View User Role List
-- Delete User Role
-
-**Models**
-
-```bash
 JSCustom\LaravelAuthenticator\Models\UserRole
+JSCustom\LaravelAuthenticator\Models\PasswordReset
 ```
 
-<a name="create-user-role-api"></a>
-### Create User Role API
+<a name="login-api"></a>
+### Login API
 
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\UserRole\UserRoleController
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
 
 ```bash
-{{url}}/api/user-role
+{{url}}/api/auth/login
 ```
 
 **Form Data**
 
 ```bash
 {
-  "role": "Staff",
-  "description": "Have access to staff level functions"
+  "username": "stevengrant",
+  "email": "stevengrant@mail.com",
+  "password": "yourpasswordhere",
 }
+```
+
+**Method**
+
+```bash
+POST
+```
+
+**Headers**
+
+```bash
+{
+  "Accept": "application/json"
+}
+```
+
+**Response**
+
+```bash
+{
+  "status": true,
+  "message": "Welcome, Steven!",
+  "payload": {
+    "user": {
+      "id": 1,
+      "username": "stevengrant",
+      "email": "stevengrant@mail.com",
+      "status": 1,
+      "role_id": 2,
+      "email_verified_at": null,
+      "created_at": "2022-06-14T23:27:07.000000Z",
+      "updated_at": "2022-06-15T14:14:18.000000Z",
+      "user_profile": {
+        "id": 1,
+        "user_id": 1,
+        "first_name": "Steven",
+        "last_name": "Grant",
+        "created_at": "2022-06-14T23:24:42.000000Z",
+        "updated_at": "2022-06-14T23:24:42.000000Z"
+      },
+      "user_role": {
+        "id": 2,
+        "role": "Regular User",
+        "description": "Regular User description here",
+        "created_at": "2022-06-14T23:24:42.000000Z",
+        "updated_at": "2022-06-14T23:24:42.000000Z"
+      }
+    },
+    "access_token": "4|SvOITBX0p79AujrZQFse75TJJgONp3kYuid7Q0uP"
+  }
+}
+```
+
+<a name="register-api"></a>
+### Register API
+
+**Controller**
+
+```bash
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+```
+
+**URL**
+
+```bash
+{{url}}/api/auth/register
+```
+
+**Form Data**
+
+```bash
+{
+  "username": "markanthony",
+  "email": "markanthony@mail.com",
+  "status": 1,
+  "role_id": 1,
+  "first_name": "Mark",
+  "last_name": "Anthony",
+  "password": "yourpasswordhere"
+}
+```
+
+**Method**
+
+```bash
+POST
+```
+
+**Headers**
+
+```bash
+{
+  "Accept": "application/json"
+}
+```
+
+**Response**
+
+```bash
+{
+  "status": true,
+  "message": "Register success.",
+  "payload": {
+    "user": {
+      "username": "markanthony",
+      "email": "markanthony@mail.com",
+      "status": 1,
+      "role_id": 1,
+      "updated_at": "2022-06-15T14:33:56.000000Z",
+      "created_at": "2022-06-15T14:33:56.000000Z",
+      "id": 8,
+      "password_unhashed": "yourpasswordhere",
+      "user_role": {
+        "id": 1,
+        "role": "Regular User",
+        "description": "Regular User description here",
+        "created_at": "2022-06-14T23:24:42.000000Z",
+        "updated_at": "2022-06-14T23:24:42.000000Z"
+      },
+      "user_profile": {
+        "id": 4,
+        "user_id": 8,
+        "first_name": "Mark",
+        "last_name": "Anthony",
+        "created_at": "2022-06-15T14:33:56.000000Z",
+        "updated_at": "2022-06-15T14:33:56.000000Z"
+      }
+    }
+  }
+}
+```
+
+<a name="logout-api"></a>
+### Logout API
+
+**Controller**
+
+```bash
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+```
+
+**URL**
+
+```bash
+{{url}}/api/auth/logout
 ```
 
 **Method**
@@ -607,241 +294,39 @@ POST
 ```bash
 {
   "status": true,
-  "message": "User role been saved.",
-  "payload": {
-    "user_role": {
-      "role": "Staff",
-      "description": "Have access to administrator level functions",
-      "updated_at": "2022-05-23T08:01:10.000000Z",
-      "created_at": "2022-05-23T08:01:10.000000Z",
-      "id": 2
-    }
-  }
+  "message": "Logout successful."
 }
 ```
 
-<a name="update-user-role-api"></a>
-### Update User Role API
+<a name="change-password-api"></a>
+### Change Password API
 
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\UserRole\UserRoleController
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
 
 ```bash
-{{url}}/api/user-role/$id
-```
-
-**Form Data**
-
-```bash
-{
-  "role": "Staff",
-  "description": "Have access to staff level functions"
-}
-```
-
-**Method**
-
-```bash
-POST
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User role been saved.",
-  "payload": {
-    "user_role": {
-      "id": 2,
-      "role": "Staff",
-      "description": "Have access to staff level functions",
-      "created_at": "2022-05-23T08:01:10.000000Z",
-      "updated_at": "2022-05-23T08:02:27.000000Z"
-    }
-  }
-}
-```
-
-<a name="view-user-role-api"></a>
-### View User Role API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\UserRole\UserRoleController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user-role/$id
-```
-
-**Method**
-
-```bash
-GET
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "status": true,
-  "message": "User role found.",
-  "payload": {
-    "user_role": {
-      "id": 2,
-      "role": "Staff",
-      "description": "Have access to staff level functions",
-      "created_at": "2022-05-23T08:01:10.000000Z",
-      "updated_at": "2022-05-23T08:02:27.000000Z"
-    }
-  }
-}
-```
-
-<a name="user-role-list-api"></a>
-### User Role List API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\UserRole\UserRoleController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user-role/list
+{{url}}/api/auth/change-password
 ```
 
 **Parameters**
 
 ```bash
 {
-  "page": 1,
-  "limit": 10,
-  "q": '<search_string>',
-  "order_by": '<column_name>',
-  "sort": "asc"
+  "current_password": "yourcurrentpassword",
+  "new_password": "yournewpassword",
+  "new_password_confirmation": "yournewpassword"
 }
 ```
 
 **Method**
 
 ```bash
-GET
-```
-
-**Headers**
-
-```bash
-{
-  "Authorization": "Bearer ...",
-  "Accept": "application/json"
-}
-```
-
-**Response**
-
-```bash
-{
-  "message": "User roles found.",
-  "payload": {
-    "user_roles": {
-      "current_page": 1,
-      "data": [
-        {
-            "id": 1,
-            "role": "Developer",
-            "description": "Developer",
-            "created_at": "2022-05-23T15:52:12.000000Z",
-            "updated_at": "2022-05-23T15:52:12.000000Z"
-        },
-        {
-            "id": 2,
-            "role": "Staff",
-            "description": "Have access to staff level functions",
-            "created_at": "2022-05-23T08:01:10.000000Z",
-            "updated_at": "2022-05-23T08:02:27.000000Z"
-        }
-      ],
-      "first_page_url": "http://127.0.0.1:8000/api/user-role/list?page=1",
-      "from": 1,
-      "last_page": 1,
-      "last_page_url": "http://127.0.0.1:8000/api/user-role/list?page=1",
-      "links": [
-        {
-          "url": null,
-          "label": "&laquo; Previous",
-          "active": false
-        },
-        {
-          "url": "http://127.0.0.1:8000/api/user-role/list?page=1",
-          "label": "1",
-          "active": true
-        },
-        {
-          "url": null,
-          "label": "Next &raquo;",
-          "active": false
-        }
-      ],
-      "next_page_url": null,
-      "path": "http://127.0.0.1:8000/api/user-role/list",
-      "per_page": "10",
-      "prev_page_url": null,
-      "to": 2,
-      "total": 2
-    }
-  }
-}
-```
-
-<a name="delete-user-role-api"></a>
-### Delete User Role API
-
-**Controller**
-
-```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\UserRole\UserRoleController
-```
-
-**URL**
-
-```bash
-{{url}}/api/user-role/$id
-```
-
-**Method**
-
-```bash
-DELETE
+POST
 ```
 
 **Headers**
@@ -858,7 +343,104 @@ DELETE
 ```bash
 {
   "status": true,
-  "message": "User role has been deleted."
+  "message": "Password updated successfully."
+}
+```
+
+<a name="forgot-password-request-api"></a>
+### Forgot Password (Send Request) API
+
+**Controller**
+
+```bash
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+```
+
+**URL**
+
+```bash
+{{url}}/api/auth/forgot-password
+```
+
+**Parameters**
+
+```bash
+{
+  "email": "markanthony@mail.com"
+}
+```
+
+**Method**
+
+```bash
+POST
+```
+
+**Headers**
+
+```bash
+{
+  "Accept": "application/json"
+}
+```
+
+**Response**
+
+```bash
+{
+  "status": true,
+  "message": "A forgot password request was sent to your email.",
+  "payload": {
+    "reset_password_token": "$2y$10$ELeKX3zUOBMQJSmuFdaAwOf7id7NNuxXwydfwL/.sIUdEZ35gwi7y"
+  }
+}
+```
+
+<a name="forgot-password-reset-api"></a>
+### Forgot Password (Reset) API
+
+**Controller**
+
+```bash
+\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+```
+
+**URL**
+
+```bash
+{{url}}/api/auth/reset-password
+```
+
+**Parameters**
+
+```bash
+{
+  "new_password": "yournewpassword",
+  "new_password_confirmation": "yournewpassword",
+  "reset_password_token": "$2y$10$IqsuRxB5ugH/aui3PCNzPeWBBKilUc3Cgy1K/F48NkgJ/O4kbO0bC"
+}
+```
+
+**Method**
+
+```bash
+POST
+```
+
+**Headers**
+
+```bash
+{
+  "Accept": "application/json"
+}
+```
+
+**Response**
+
+```bash
+{
+  "status": true,
+  "message": "Password reset successfully."
 }
 ```
 

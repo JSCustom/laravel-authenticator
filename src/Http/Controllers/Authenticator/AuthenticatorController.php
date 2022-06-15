@@ -27,7 +27,7 @@ class AuthenticatorController extends Controller
         }
         $user = auth()->user();
         $user->currentAccessToken()->delete();
-        return response(['message' => 'Logout successful.'], HttpServiceProvider::OK);
+        return response(['status' => true, 'message' => 'Logout successful.'], HttpServiceProvider::OK);
     }
     public function register(Request $request)
     {
