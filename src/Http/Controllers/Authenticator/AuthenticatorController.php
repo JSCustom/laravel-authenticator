@@ -35,7 +35,15 @@ class AuthenticatorController extends Controller
         if (!$user->status) {
             return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
         }
-        return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::OK);
+        $user->data->userRole;
+        $request->request->add(['user_id' => $user->data->id]);
+        $userProfile = $this->_userProfile->saveData($request);
+        if (!$userProfile->status) {
+            $this->_user->find($request->user_id)->delete();
+            return response(['status' => $userProfile->status, 'message' => $userProfile->message], HttpServiceProvider::BAD_REQUEST);
+        }
+        $user->data->userProfile;
+        return response(['status' => $user->status, 'message' => $user->message, 'payload' => ['user' => $user->data]], HttpServiceProvider::CREATED);
     }
     public function forgotPassword(Request $request)
     {
