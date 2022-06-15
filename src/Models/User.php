@@ -228,6 +228,41 @@ class User extends Authenticatable
   }
   public function changePassword($request)
   {
-
+    $user = auth()->user();
+    $validator = Validator::make($request->all(), [
+      'current_password' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255,
+        function ($attribute, $value, $fail) use ($user) {
+            if (!Hash::check($value, $user->password)) {
+                $fail('Your password was not updated, since the provided current password does not match.');
+            }
+        }
+      ],
+      'new_password' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255,
+        'confirmed',
+        'different:current_password'
+      ],
+      'new_password_confirmation' => [
+        config('authenticator.model.authenticator.password.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.password.type'),
+        'min:' . config('authenticator.model.authenticator.password.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.password.maxlength') ?? 255
+      ],
+    ]);
+    if ($validator->stopOnFirstFailure()->fails()) {
+        $errors = $validator->errors();
+        return (object)['status' => false, 'message' => $errors->first()];
+    }
+    $user->fill([
+        'password' => Hash::make($request->new_password)
+    ])->save();
+    return (object)['status' => true, 'message' => 'Password updated successfully.'];
   }
 }
