@@ -31,7 +31,7 @@ class AuthenticatorController extends Controller
     }
     public function register(Request $request)
     {
-        $user = $this->_user->register($request);
+        $user = $this->_user->saveData($request);
         if (!$user->status) {
             return response(['status' => $user->status, 'message' => $user->message], HttpServiceProvider::BAD_REQUEST);
         }

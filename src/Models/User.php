@@ -100,6 +100,74 @@ class User extends Authenticatable
     $user->userRole;
     return (object)['status' => true, 'message' => 'Welcome, ' . $user->userProfile->first_name . '!', 'data' => $user];
   }
+  public function saveData($request, $id = NULL)
+  {
+    if (!config('authenticator.model.authenticator.status.required')) {
+      $request->status = config('authenticator.model.authenticator.status.default');
+    }
+    if (!config('authenticator.model.authenticator.role_id.required')) {
+      $request->role_id = config('authenticator.model.authenticator.role_id.default');
+    }
+    $validator = Validator::make($request->all(), [
+      'username' => [
+        config('authenticator.model.authenticator.username.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.username.type'),
+        config('authenticator.model.authenticator.username.unique') ? 'unique:users,username,'.$id.',id' : '',
+        'min:' . config('authenticator.model.authenticator.username.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.username.maxlength') ?? 255
+      ],
+      'email' => [
+        config('authenticator.model.authenticator.email.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.email.type'),
+        config('authenticator.model.authenticator.email.unique') ? 'unique:users,email,'.$id.',id' : '',
+        'min:' . config('authenticator.model.authenticator.email.minlength') ?? 0,
+        'max:' . config('authenticator.model.authenticator.email.maxlength') ?? 255
+      ],
+      'status' => [
+        config('authenticator.model.authenticator.status.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.status.type')
+      ],
+      'role_id' => [
+        config('authenticator.model.authenticator.role_id.required') ? 'required' : 'nullable',
+        config('authenticator.model.authenticator.role_id.type')
+      ]
+    ]);
+    if ($validator->stopOnFirstFailure()->fails()) {
+      $errors = $validator->errors();
+      return (object)['status' => false, 'message' => $errors->first()];
+    }
+    $password = strtoupper(Str::random(8));
+    if ($request->password) {
+      $password = $request->password;
+    }
+    if ($id) {
+      $user = User::updateOrCreate([
+        'id' => $id
+      ],
+      [
+        'username' => $request->username ?? NULL,
+        'email' => $request->email ?? NULL,
+        'status' => $request->status,
+        'role_id' => $request->role_id
+      ]);
+    } else {
+      $user = User::updateOrCreate([
+        'id' => $id
+      ],
+      [
+        'username' => $request->username ?? NULL,
+        'email' => $request->email ?? NULL,
+        'password' => Hash::make($password),
+        'status' => $request->status,
+        'role_id' => $request->role_id
+      ]);
+    }
+    if (!$user) {
+      return (object)['status' => false, 'message' => 'Failed to register.'];
+    }
+    $user->password_unhashed = $password;
+    return (object)['status' => true, 'message' => 'Register success.', 'data' => $user];
+  }
   public function forgotPassword($request)
   {
     $validate = User::whereEmail($request->email)->first();
@@ -151,5 +219,9 @@ class User extends Authenticatable
     }
     PasswordReset::whereToken($request->reset_password_token)->delete();
     return (object)['status' => true, 'message' => 'Password reset successfully.'];
+  }
+  public function changePassword($request)
+  {
+    
   }
 }
