@@ -31,20 +31,20 @@ class UserProfile extends Model
   {
     $validator = Validator::make($request->all(), [
       'user_id' => [
-        config('user.model.user_profile.user_id.required') ? 'required' : 'nullable',
-        config('user.model.user_profile.user_id.type')
+        config('authenticator.model.user_profile.user_id.required') ? 'required' : 'nullable',
+        config('authenticator.model.user_profile.user_id.type')
       ],
       'first_name' => [
-        config('user.model.user_profile.first_name.required') ? 'required' : 'nullable',
-        config('user.model.user_profile.first_name.type'),
-        'min:' . config('user.model.user_profile.first_name.minlength') ?? 0,
-        'max:' . config('user.model.user_profile.first_name.maxlength') ?? 255
+        config('authenticator.model.user_profile.first_name.required') ? 'required' : 'nullable',
+        config('authenticator.model.user_profile.first_name.type'),
+        'min:' . config('authenticator.model.user_profile.first_name.minlength') ?? 0,
+        'max:' . config('authenticator.model.user_profile.first_name.maxlength') ?? 255
       ],
       'last_name' => [
-        config('user.model.user_profile.last_name.required') ? 'required' : 'nullable',
-        config('user.model.user_profile.last_name.type'),
-        'min:' . config('user.model.user_profile.last_name.minlength') ?? 0,
-        'max:' . config('user.model.user_profile.last_name.maxlength') ?? 255
+        config('authenticator.model.user_profile.last_name.required') ? 'required' : 'nullable',
+        config('authenticator.model.user_profile.last_name.type'),
+        'min:' . config('authenticator.model.user_profile.last_name.minlength') ?? 0,
+        'max:' . config('authenticator.model.user_profile.last_name.maxlength') ?? 255
       ]
     ]);
     if ($validator->stopOnFirstFailure()->fails()) {
