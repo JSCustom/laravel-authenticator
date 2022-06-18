@@ -41,10 +41,10 @@ class LaravelSanctumAuthServiceProvider extends ServiceProvider
     protected function registerMigrations()
     {
         $this->publishes([
-            __DIR__ . '/../database/migrations/create_users_table.php' => database_path('migrations/laravel-authenticator/' . date('Y_m_d_His', time()) . '_create_users_table.php'),
-            __DIR__ . '/../database/migrations/create_user_roles_table.php' => database_path('migrations/laravel-authenticator/' . date('Y_m_d_His', time()) . '_create_user_roles_table.php'),
-            __DIR__ . '/../database/migrations/create_user_profiles_table.php' => database_path('migrations/laravel-authenticator/' . date('Y_m_d_His', time()) . '_create_user_profiles_table.php'),
-            __DIR__ . '/../database/migrations/create_password_resets_table.php' => database_path('migrations/laravel-authenticator/' . date('Y_m_d_His', time()) . '_create_password_resets_table.php')
+            __DIR__ . '/../database/migrations/create_users_table.php' => database_path('migrations/laravel-sanctum-auth/' . date('Y_m_d_His', time()) . '_create_users_table.php'),
+            __DIR__ . '/../database/migrations/create_user_roles_table.php' => database_path('migrations/laravel-sanctum-auth/' . date('Y_m_d_His', time()) . '_create_user_roles_table.php'),
+            __DIR__ . '/../database/migrations/create_user_profiles_table.php' => database_path('migrations/laravel-sanctum-auth/' . date('Y_m_d_His', time()) . '_create_user_profiles_table.php'),
+            __DIR__ . '/../database/migrations/create_password_resets_table.php' => database_path('migrations/laravel-sanctum-auth/' . date('Y_m_d_His', time()) . '_create_password_resets_table.php')
         ], 'migrations');
     }
 }
