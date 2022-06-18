@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "7868448a-8272-4efb-af33-7f77a5174cdd",
-		"name": "Laravel Authenticator",
+		"name": "Laravel Sanctum Auth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21205296"
 	},

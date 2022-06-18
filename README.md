@@ -1,6 +1,6 @@
 
-# Laravel User Management API
-Laravel package for authenticator. Includes login, register, logout, change password and forgot password.
+# Laravel Sanctum Authenticator API
+Laravel package for sanctum authenticator. Includes login, register, logout, change password and forgot password.
 
 ## Table of Contents
 
@@ -9,7 +9,7 @@ Laravel package for authenticator. Includes login, register, logout, change pass
 [Installation](#installation)<br>
 [How to Use](#how-to-use)<br>
 [Download Postman API](#download-postman-api)<br>
-[Authenticator](#authenticator)<br>
+[Sanctum Authenticator](#authenticator)<br>
 [Login API](#login-api)<br>
 [Register API](#register-api)<br>
 [Logout API](#logout-api)<br>
@@ -20,7 +20,7 @@ Laravel package for authenticator. Includes login, register, logout, change pass
 
 <a name="getting-started"></a>
 ## Getting Started
-Below are the steps in order to integrate authenticator API to your Laravel project.
+Below are the steps in order to integrate sanctum authenticator API to your Laravel project.
 
 <a name="prerequisites"></a>
 ## Prerequisite(s)
@@ -54,25 +54,25 @@ Add the following lines of code to the ***$routeMiddleware*** variable in the **
 Install the package using composer:
 
 ```bash
-composer require jscustom/laravel-authenticator
+composer require jscustom/laravel-sanctum-auth
 ```
 
 Export the configuration file:
 
 ```bash
-php artisan vendor:publish --provider="JSCustom\LaravelAuthenticator\Providers\LaravelAuthenticatorServiceProvider" --tag="config"
+php artisan vendor:publish --provider="JSCustom\LaravelSanctumAuth\Providers\LaravelSanctumAuthServiceProvider" --tag="config"
 ```
 
 Export the migration files:
 
 ```bash
-php artisan vendor:publish --provider="JSCustom\LaravelAuthenticator\Providers\LaravelAuthenticatorServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="JSCustom\LaravelSanctumAuth\Providers\LaravelSanctumAuthServiceProvider" --tag="migrations"
 ```
 
 Do a quick migration:
 
 ```bash
-php artisan migrate --path=/database/migrations/laravel-authenticator
+php artisan migrate --path=/database/migrations/laravel-sanctum-auth
 ```
 
 <a name="how-to-use"></a>
@@ -81,10 +81,10 @@ php artisan migrate --path=/database/migrations/laravel-authenticator
 <a name="download-postman-api"></a>
 ### Download Postman API
 
-Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/JSCustom/laravel-authenticator/blob/master/src/assets/postman/Laravel_Authenticator.postman_collection.json).
+Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/JSCustom/laravel-sanctum-auth/blob/master/src/assets/postman/Laravel_Sanctum_Auth.postman_collection.json).
 
 <a name="authenticator"></a>
-### Authenticator
+### Sanctum Authenticator
 
 **Features**
 
@@ -98,10 +98,10 @@ Download the Postman API Collection [here](https://minhaskamal.github.io/DownGit
 **Models**
 
 ```bash
-JSCustom\LaravelAuthenticator\Models\User
-JSCustom\LaravelAuthenticator\Models\UserProfile
-JSCustom\LaravelAuthenticator\Models\UserRole
-JSCustom\LaravelAuthenticator\Models\PasswordReset
+JSCustom\LaravelSanctumAuth\Models\User
+JSCustom\LaravelSanctumAuth\Models\UserProfile
+JSCustom\LaravelSanctumAuth\Models\UserRole
+JSCustom\LaravelSanctumAuth\Models\PasswordReset
 ```
 
 <a name="login-api"></a>
@@ -110,7 +110,7 @@ JSCustom\LaravelAuthenticator\Models\PasswordReset
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
@@ -186,7 +186,7 @@ POST
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
@@ -265,7 +265,7 @@ POST
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
@@ -304,7 +304,7 @@ POST
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
@@ -353,7 +353,7 @@ POST
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**
@@ -402,7 +402,7 @@ POST
 **Controller**
 
 ```bash
-\JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController
+\JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController
 ```
 
 **URL**

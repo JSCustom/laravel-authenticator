@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator\AuthenticatorController;
+use JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator\AuthenticatorController;
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('/login', [AuthenticatorController::class, 'login']);

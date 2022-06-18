@@ -1,5 +1,5 @@
 {
-    "name": "jscustom/laravel-authenticator",
+    "name": "jscustom/laravel-sanctum-auth",
     "description": "Laravel package for user authentication.",
     "type": "library",
     "require": {
@@ -12,7 +12,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "JSCustom\\LaravelAuthenticator\\": "src/"
+            "JSCustom\\LaravelSanctumAuth\\": "src/"
         }
     },
     "authors": [
@@ -25,10 +25,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "JSCustom\\LaravelAuthenticator\\Providers\\LaravelAuthenticatorServiceProvider"
+                "JSCustom\\LaravelSanctumAuth\\Providers\\LaravelSanctumAuthServiceProvider"
             ],
             "aliases": {
-                "Qbo": "JSCustom\\LaravelAuthenticator\\Facade"
+                "Qbo": "JSCustom\\LaravelSanctumAuth\\Facade"
             }
         }
     }

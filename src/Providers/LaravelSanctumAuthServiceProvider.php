@@ -1,11 +1,11 @@
 <?php
 
-namespace JSCustom\LaravelAuthenticator\Providers;
+namespace JSCustom\LaravelSanctumAuth\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
-class LaravelAuthenticatorServiceProvider extends ServiceProvider
+class LaravelSanctumAuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {

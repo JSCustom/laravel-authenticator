@@ -1,6 +1,6 @@
 <?php
 
-namespace JSCustom\LaravelAuthenticator\Models;
+namespace JSCustom\LaravelSanctumAuth\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

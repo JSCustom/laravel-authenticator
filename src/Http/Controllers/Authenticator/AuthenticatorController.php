@@ -1,11 +1,11 @@
 <?php
 
-namespace JSCustom\LaravelAuthenticator\Http\Controllers\Authenticator;
+namespace JSCustom\LaravelSanctumAuth\Http\Controllers\Authenticator;
 
-use JSCustom\LaravelAuthenticator\Http\Controllers\Controller as Controller;
+use JSCustom\LaravelSanctumAuth\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use JSCustom\LaravelAuthenticator\Providers\HttpServiceProvider;
+use JSCustom\LaravelSanctumAuth\Providers\HttpServiceProvider;
 
 class AuthenticatorController extends Controller
 {

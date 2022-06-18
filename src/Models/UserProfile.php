@@ -1,6 +1,6 @@
 <?php
 
-namespace JSCustom\LaravelAuthenticator\Models;
+namespace JSCustom\LaravelSanctumAuth\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
